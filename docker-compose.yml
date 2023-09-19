@@ -1,0 +1,20 @@
+# Specifieke versie van docker-compose die we willen gebruiken
+version: '3.8'
+# Alle services die we gebruiken
+services:
+  # In ons geval is dit de nextjs app.
+  app:
+    image: openai-demo-app
+    build:
+      # context specificeert de huidige directory
+      context: ./
+      # target specificeert welke stage van de dockerfile je wilt uitvoeren
+      target: dev
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      # Map port 3000 on host naar 3000 in de container
+      - "3000:3000"

@@ -1,0 +1,14 @@
+# Zeggen dat docker de officiele node image moet gebruiken
+FROM node:18
+# De commands die na workdir komen worden vanuit /app uitgevoerd
+WORKDIR /app
+# Kopieer de package-lock en package.json files naar de container
+COPY package*.json ./
+# Nu we alle packages en dependencies hebben installeren we deze in onze container
+RUN npm install
+# Vervolgens kopieren we alle content van root . naar de root van onze workingdir /app .
+COPY . .
+# We vertellen de container dat onze app runt op port 3000
+EXPOSE 3000
+# Tot slot zeggen we dat de container de dev omgeving kan starten
+CMD npm run dev
